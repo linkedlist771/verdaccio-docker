@@ -28,4 +28,3 @@ server:
   trustProxy: true
 
 # Force Verdaccio to generate links/assets with your HTTPS domain to avoid mixed-content issues.
-url_prefix: https://npm.585dg.com/
