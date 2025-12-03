@@ -3,8 +3,8 @@ storage: /verdaccio/storage
 auth:
   htpasswd:
     file: /verdaccio/storage/htpasswd
-    max_users: -1
-
+    # max_users: -1
+    max_users: 1000 
 uplinks:
   npmjs:
     url: https://registry.npmjs.org/
@@ -23,3 +23,9 @@ logs:
   - type: stdout
     format: pretty
     level: info
+
+server:
+  trustProxy: true
+
+# Force Verdaccio to generate links/assets with your HTTPS domain to avoid mixed-content issues.
+url_prefix: https://npm.585dg.com/
