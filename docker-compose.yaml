@@ -10,7 +10,16 @@ services:
     volumes:
       - verdaccio-storage:/verdaccio/storage
       - ./conf:/verdaccio/conf
+    networks:
+      - verd-net
 
 volumes:
   verdaccio-storage:
     driver: local
+
+networks:
+  verd-net:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 10.250.0.0/24
