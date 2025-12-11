@@ -3,17 +3,27 @@ storage: /verdaccio/storage
 auth:
   htpasswd:
     file: /verdaccio/storage/htpasswd
-    # max_users: -1
     max_users: 1000 
+
 uplinks:
   npmjs:
     url: https://registry.npmjs.org/
 
 packages:
+  # ★ 新增：@google scope 不走代理，只用本地存储
+  "@google/*":
+    access: $all
+    publish: $authenticated
+    unpublish: $authenticated
+    # 注意：这里故意不设置 proxy，这样就不会从官方 npm 同步
+
+  # 其他 scoped 包继续代理官方
   "@*/*":
     access: $all
     publish: $authenticated
     proxy: npmjs
+
+  # 非 scoped 包
   "**":
     access: $all
     publish: $authenticated
@@ -26,5 +36,3 @@ logs:
 
 server:
   trustProxy: true
-
-# Force Verdaccio to generate links/assets with your HTTPS domain to avoid mixed-content issues.
